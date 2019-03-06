@@ -7,6 +7,7 @@ import (
 	"time"
 )
 
+// Minor bug when board fills, the board doesnt technically have a tie function or a lose lol
 var ln1 [6]int
 var ln2 [6]int
 var ln3 [6]int
@@ -28,20 +29,11 @@ func main() {
 	}
 }
 func run() {
-	var isRunning bool
-
-	isRunning = true
-	if !isRunning {
-		os.Exit(0)
-	} else {
-		//for isRunning == true {
-		draw()
-		logic()
-	}
+	draw()
+	logic()
 }
 func draw() {
 	cls()
-	fmt.Println(curPlayer)
 	in1 := [6]int{0, 1, 2, 3, 4, 5}
 	fmt.Println(in1)
 	fmt.Println(ln1)
@@ -82,35 +74,28 @@ func logic() {
 	switch rowSelect {
 	case 42:
 		clearBoard()
-		draw()
-		logic()
+		run()
 	case 25:
 		os.Exit(0)
 	case 0:
 		//USE A SELECTOR FOR WHICH LINE
 		col(0)
-		draw()
-		logic()
+		run()
 	case 1:
 		col(1)
-		draw()
-		logic()
+		run()
 	case 2:
 		col(2)
-		draw()
-		logic()
+		run()
 	case 3:
 		col(3)
-		draw()
-		logic()
+		run()
 	case 4:
 		col(4)
-		draw()
-		logic()
+		run()
 	case 5:
 		col(5)
-		draw()
-		logic()
+		run()
 	}
 }
 func col(row int) {
@@ -207,6 +192,11 @@ func checkWin() {
 }
 func win() {
 	fmt.Println("You Win!")
+	time.Sleep(2 * time.Second)
+	os.Exit(0)
+}
+func lose() {
+	fmt.Println("You Lost!")
 	time.Sleep(2 * time.Second)
 	os.Exit(0)
 }
